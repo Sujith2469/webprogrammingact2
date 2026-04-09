@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sujith S | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #0f3460;
+      --highlight: #e94560;
+      --light-bg: #f8f9fa;
+      --card-bg: #ffffff;
+    }
+    * { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', sans-serif; color: #333; }
+
+    /* NAV */
+    .navbar { background: var(--primary) !important; }
+    .navbar-brand { color: var(--highlight) !important; font-weight: 700; font-size: 1.4rem; }
+    .nav-link { color: #ccc !important; font-weight: 500; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active-link { color: var(--highlight) !important; }
+
+    /* PAGE SECTIONS */
+    .page-section { display: none; min-height: 100vh; }
+    .page-section.active { display: block; }
+
+    /* ===== HOME ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-title { font-size: 3.2rem; font-weight: 800; color: #fff; }
+    .hero-title span { color: var(--highlight); }
+    .hero-subtitle { font-size: 1.3rem; color: #aac4e0; font-weight: 400; }
+    .hero-desc { color: #c8d8e8; font-size: 1rem; line-height: 1.8; }
+    .btn-primary-custom {
+      background: var(--highlight);
+      border: none;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary-custom:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(233,69,96,0.4); color:#fff; }
+    .btn-outline-custom {
+      border: 2px solid #aac4e0;
+      color: #aac4e0;
+      padding: 0.75rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      background: transparent;
+      transition: all 0.2s;
+    }
+    .btn-outline-custom:hover { background: #aac4e0; color: var(--primary); }
+    .avatar-circle {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--highlight), #ff8c69);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; font-weight: 800; color: #fff;
+      border: 5px solid rgba(255,255,255,0.2);
+      margin: 0 auto;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 1.25rem;
+      text-align: center;
+      color: #fff;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--highlight); }
+    .stat-card .label { font-size: 0.85rem; color: #aac4e0; }
+    .tech-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      color: #cde;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.82rem;
+      margin: 4px;
+    }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--light-bg); padding: 80px 0; }
+    .section-title { font-size: 2.2rem; font-weight: 700; color: var(--primary); position: relative; margin-bottom: 0.5rem; }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px; height: 4px;
+      background: var(--highlight);
+      border-radius: 2px;
+      margin-top: 8px;
+    }
+    .info-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      height: 100%;
+    }
+    .info-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 1.2rem; }
+    .info-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(233,69,96,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--highlight); font-size: 1.1rem; flex-shrink: 0;
+    }
+    .info-label { font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-value { font-weight: 600; color: var(--primary); font-size: 0.95rem; }
+    .skill-tag {
+      display: inline-block;
+      background: rgba(15,52,96,0.08);
+      color: var(--accent);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin: 4px;
+      border: 1px solid rgba(15,52,96,0.15);
+    }
+    .about-photo-bg {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    /* ===== SKILLS ===== */
+    #skills { background: #fff; padding: 80px 0; }
+    .skill-category-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      height: 100%;
+      border-top: 4px solid var(--highlight);
+    }
+    .skill-category-title { font-weight: 700; color: var(--primary); font-size: 1.1rem; margin-bottom: 1.2rem; }
+    .skill-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--light-bg);
+      border-radius: 24px;
+      padding: 8px 16px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin: 5px;
+      border: 1px solid #e0e6ee;
+      transition: all 0.2s;
+    }
+    .skill-pill:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+    .skill-pill i { font-size: 1rem; color: var(--highlight); }
+    .skill-pill:hover i { color: #fff; }
+    .tools-grid { display: flex; flex-wrap: wrap; }
+    .lang-card {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 16px;
+      padding: 1.5rem;
+      color: #fff;
+    }
+    .lang-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      margin: 4px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ===== EXPERIENCE ===== */
+    #experience { background: var(--light-bg); padding: 80px 0; }
+    .timeline { position: relative; padding-left: 36px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 14px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--highlight), var(--accent));
+    }
+    .timeline-item { position: relative; margin-bottom: 3rem; }
+    .timeline-dot {
+      position: absolute;
+      left: -29px; top: 4px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--highlight);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 3px var(--highlight);
+    }
+    .timeline-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      border-left: 4px solid var(--highlight);
+    }
+    .timeline-company { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+    .timeline-role { color: var(--highlight); font-weight: 600; font-size: 0.95rem; }
+    .timeline-date { background: rgba(233,69,96,0.1); color: var(--highlight); padding: 4px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
+    .timeline-location { color: #888; font-size: 0.85rem; }
+    .achievement-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-bottom: 0.7rem; font-size: 0.92rem; color: #555;
+    }
+    .achievement-item i { color: var(--highlight); margin-top: 3px; flex-shrink: 0; }
+    .edu-card {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 20px;
+      padding: 2rem;
+      color: #fff;
+    }
+    .course-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.82rem;
+      margin: 4px;
+    }
+
+    /* FOOTER */
+    footer { background: var(--primary); color: #aac4e0; padding: 2rem 0; text-align: center; font-size: 0.88rem; }
+    footer a { color: var(--highlight); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+      .avatar-circle { width: 150px; height: 150px; font-size: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top shadow">
+  <div class="container">
+    <a class="navbar-brand" href="#">&lt;Sujith /&gt;</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link active-link" href="#" onclick="showPage('home',this)"><i class="bi bi-house-door me-1"></i>Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('about',this)"><i class="bi bi-person me-1"></i>About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('skills',this)"><i class="bi bi-code-slash me-1"></i>Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('experience',this)"><i class="bi bi-briefcase me-1"></i>Experience</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== PAGE 1: HOME ==================== -->
+<section id="home" class="page-section active">
+  <div class="hero">
+    <div class="container py-5">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7 order-2 order-lg-1">
+          <p class="text-uppercase mb-2" style="color:#e94560;letter-spacing:2px;font-size:.85rem;font-weight:600">Welcome to my portfolio</p>
+          <h1 class="hero-title">Hi, I'm <span>Sujith S</span></h1>
+          <p class="hero-subtitle mt-2 mb-3">BCA Student &amp; AI/ML Enthusiast</p>
+          <p class="hero-desc mb-4">
+            Motivated BCA student specializing in <strong style="color:#e8c97c">Artificial Intelligence and Machine Learning</strong> with a strong foundation in programming and data structures. Proficient in Python, SQL, and Java with hands-on internship experience in Microsoft Power Apps.
+          </p>
+          <div class="d-flex flex-wrap gap-3 mb-5">
+            <button class="btn-primary-custom" onclick="showPage('experience', document.querySelectorAll('.nav-link')[3])">View Experience</button>
+            <button class="btn-outline-custom" onclick="showPage('about', document.querySelectorAll('.nav-link')[1])">About Me</button>
+          </div>
+          <div class="row g-3">
+            <div class="col-4"><div class="stat-card"><div class="number">1+</div><div class="label">Year Intern</div></div></div>
+            <div class="col-4"><div class="stat-card"><div class="number">4</div><div class="label">Languages</div></div></div>
+            <div class="col-4"><div class="stat-card"><div class="number">2026</div><div class="label">Graduating</div></div></div>
+          </div>
+        </div>
+        <div class="col-lg-5 order-1 order-lg-2 text-center">
+          <div class="avatar-circle mb-4">SS</div>
+          <p style="color:#aac4e0;font-size:.85rem;margin-bottom:.75rem">Tech Stack</p>
+          <div>
+            <span class="tech-badge"><i class="bi bi-filetype-py me-1"></i>Python</span>
+            <span class="tech-badge">Java</span>
+            <span class="tech-badge">SQL</span>
+            <span class="tech-badge">C</span>
+            <span class="tech-badge">Power Apps</span>
+            <span class="tech-badge">HTML</span>
+            <span class="tech-badge">MS Office</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PAGE 2: ABOUT ==================== -->
+<section id="about" class="page-section">
+  <div style="background:var(--light-bg);padding:80px 0;">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-4">
+          <div class="about-photo-bg">
+            <div class="avatar-circle mb-3" style="width:140px;height:140px;font-size:3rem">SS</div>
+            <h4 class="fw-700 mb-1" style="font-weight:700">Sujith S</h4>
+            <p style="color:#aac4e0;font-size:.9rem;margin-bottom:1.5rem">BCA Student · AI & ML</p>
+            <div class="d-flex flex-column gap-2 text-start">
+              <div class="d-flex align-items-center gap-2" style="color:#cde;font-size:.85rem"><i class="bi bi-geo-alt-fill" style="color:#e94560"></i>Chennai, Tamil Nadu</div>
+              <div class="d-flex align-items-center gap-2" style="color:#cde;font-size:.85rem"><i class="bi bi-telephone-fill" style="color:#e94560"></i>8610676183</div>
+              <div class="d-flex align-items-center gap-2" style="color:#cde;font-size:.85rem"><i class="bi bi-envelope-fill" style="color:#e94560"></i>Sujith.sridhar76@gmail.com</div>
+            </div>
+            <a href="https://www.linkedin.com/in/sujith-sridhar-158b8229a" target="_blank" class="btn btn-sm mt-3 w-100" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:20px"><i class="bi bi-linkedin me-2"></i>LinkedIn Profile</a>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <h2 class="section-title mb-4">About Me</h2>
+          <p style="color:#555;font-size:1rem;line-height:1.9;margin-bottom:2rem">
+            I'm a passionate BCA student at Jain University, Bangalore, specializing in Artificial Intelligence and Machine Learning. I have a strong foundation in programming, data structures, and software development. My internship at Hitachi Solutions gave me real-world exposure to full-stack business solutions using Microsoft Power Apps. I'm eager to leverage my technical knowledge and problem-solving abilities in impactful software projects.
+          </p>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="info-card">
+                <h6 class="fw-bold mb-3" style="color:var(--primary)">Personal Information</h6>
+                <div class="info-item">
+                  <div class="info-icon"><i class="bi bi-person-fill"></i></div>
+                  <div><div class="info-label">Full Name</div><div class="info-value">Sujith S</div></div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                  <div><div class="info-label">Location</div><div class="info-value">Chennai, Tamil Nadu</div></div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon"><i class="bi bi-mortarboard-fill"></i></div>
+                  <div><div class="info-label">Degree</div><div class="info-value">BCA in AI & ML (2023–2026)</div></div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon"><i class="bi bi-building"></i></div>
+                  <div><div class="info-label">University</div><div class="info-value">Jain University, Bangalore</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-card">
+                <h6 class="fw-bold mb-3" style="color:var(--primary)">Languages Known</h6>
+                <div class="mb-3">
+                  <span class="skill-tag"><i class="bi bi-translate me-1"></i>English</span>
+                  <span class="skill-tag">Hindi</span>
+                  <span class="skill-tag">Tamil</span>
+                  <span class="skill-tag">Telugu</span>
+                </div>
+                <h6 class="fw-bold mb-3 mt-4" style="color:var(--primary)">Soft Skills</h6>
+                <span class="skill-tag">Problem-solving</span>
+                <span class="skill-tag">Teamwork</span>
+                <span class="skill-tag">Communication</span>
+                <span class="skill-tag">Time Management</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h6 class="fw-bold mb-3" style="color:var(--primary)">Relevant Coursework</h6>
+            <div>
+              <span class="skill-tag">Data Structures</span>
+              <span class="skill-tag">Database Management Systems (SQL)</span>
+              <span class="skill-tag">Object-Oriented Programming (Java)</span>
+              <span class="skill-tag">Python for Data Science</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PAGE 3: SKILLS ==================== -->
+<section id="skills" class="page-section">
+  <div style="background:#fff;padding:80px 0;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title d-inline-block">Technical Skills</h2>
+        <p style="color:#888;margin-top:1rem">Technologies and tools I work with</p>
+      </div>
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-category-card text-center">
+            <div class="mb-3" style="font-size:2.5rem;color:var(--highlight)"><i class="bi bi-code-slash"></i></div>
+            <div class="skill-category-title">Programming Languages</div>
+            <div class="tools-grid justify-content-center">
+              <span class="skill-pill"><i class="bi bi-filetype-py"></i>Python</span>
+              <span class="skill-pill"><i class="bi bi-cup-hot"></i>Java</span>
+              <span class="skill-pill"><i class="bi bi-braces"></i>C</span>
+              <span class="skill-pill"><i class="bi bi-database"></i>SQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-category-card text-center">
+            <div class="mb-3" style="font-size:2.5rem;color:var(--highlight)"><i class="bi bi-globe"></i></div>
+            <div class="skill-category-title">Web & Business Tools</div>
+            <div class="tools-grid justify-content-center">
+              <span class="skill-pill"><i class="bi bi-microsoft"></i>Power Apps</span>
+              <span class="skill-pill"><i class="bi bi-filetype-html"></i>HTML</span>
+              <span class="skill-pill"><i class="bi bi-file-excel"></i>Excel</span>
+              <span class="skill-pill"><i class="bi bi-file-ppt"></i>PowerPoint</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-category-card text-center">
+            <div class="mb-3" style="font-size:2.5rem;color:var(--highlight)"><i class="bi bi-cpu"></i></div>
+            <div class="skill-category-title">AI & Data Science</div>
+            <div class="tools-grid justify-content-center">
+              <span class="skill-pill"><i class="bi bi-graph-up"></i>Machine Learning</span>
+              <span class="skill-pill"><i class="bi bi-bar-chart"></i>Data Science</span>
+              <span class="skill-pill"><i class="bi bi-table"></i>Data Structures</span>
+              <span class="skill-pill"><i class="bi bi-diagram-3"></i>Algorithms</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-category-card text-center">
+            <div class="mb-3" style="font-size:2.5rem;color:var(--highlight)"><i class="bi bi-people"></i></div>
+            <div class="skill-category-title">Soft Skills</div>
+            <div class="tools-grid justify-content-center">
+              <span class="skill-pill"><i class="bi bi-lightbulb"></i>Problem Solving</span>
+              <span class="skill-pill"><i class="bi bi-people"></i>Teamwork</span>
+              <span class="skill-pill"><i class="bi bi-chat-dots"></i>Communication</span>
+              <span class="skill-pill"><i class="bi bi-clock"></i>Time Mgmt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proficiency Visual -->
+      <div class="row g-4 mt-3">
+        <div class="col-lg-8">
+          <div class="info-card">
+            <h6 class="fw-bold mb-4" style="color:var(--primary)">Skill Proficiency</h6>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1"><span style="font-size:.9rem;font-weight:500">Python</span><span style="font-size:.82rem;color:var(--highlight)">85%</span></div>
+              <div class="progress" style="height:8px;border-radius:8px"><div class="progress-bar" style="width:85%;background:linear-gradient(90deg,var(--highlight),#ff8c69);border-radius:8px"></div></div>
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1"><span style="font-size:.9rem;font-weight:500">Java</span><span style="font-size:.82rem;color:var(--highlight)">75%</span></div>
+              <div class="progress" style="height:8px;border-radius:8px"><div class="progress-bar" style="width:75%;background:linear-gradient(90deg,#0f3460,#185fa5);border-radius:8px"></div></div>
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1"><span style="font-size:.9rem;font-weight:500">SQL</span><span style="font-size:.82rem;color:var(--highlight)">80%</span></div>
+              <div class="progress" style="height:8px;border-radius:8px"><div class="progress-bar" style="width:80%;background:linear-gradient(90deg,#0d6e56,#1d9e75);border-radius:8px"></div></div>
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1"><span style="font-size:.9rem;font-weight:500">Microsoft Power Apps</span><span style="font-size:.82rem;color:var(--highlight)">80%</span></div>
+              <div class="progress" style="height:8px;border-radius:8px"><div class="progress-bar" style="width:80%;background:linear-gradient(90deg,#7f77dd,#534ab7);border-radius:8px"></div></div>
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1"><span style="font-size:.9rem;font-weight:500">HTML</span><span style="font-size:.82rem;color:var(--highlight)">70%</span></div>
+              <div class="progress" style="height:8px;border-radius:8px"><div class="progress-bar" style="width:70%;background:linear-gradient(90deg,#ba7517,#ef9f27);border-radius:8px"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="lang-card h-100 d-flex flex-column justify-content-center">
+            <h6 class="fw-bold mb-3">Languages Spoken</h6>
+            <div>
+              <span class="lang-badge"><i class="bi bi-chat-fill me-1"></i>English</span>
+              <span class="lang-badge">Hindi</span>
+              <span class="lang-badge">Tamil</span>
+              <span class="lang-badge">Telugu</span>
+            </div>
+            <hr style="border-color:rgba(255,255,255,.2);margin:1.5rem 0"/>
+            <h6 class="fw-bold mb-3">Focus Areas</h6>
+            <div>
+              <span class="lang-badge">Artificial Intelligence</span>
+              <span class="lang-badge">Machine Learning</span>
+              <span class="lang-badge">Web Development</span>
+              <span class="lang-badge">Data Science</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PAGE 4: EXPERIENCE ==================== -->
+<section id="experience" class="page-section">
+  <div style="background:var(--light-bg);padding:80px 0;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title d-inline-block">Experience & Education</h2>
+        <p style="color:#888;margin-top:1rem">My professional journey and academic background</p>
+      </div>
+      <div class="row g-5">
+        <div class="col-lg-7">
+          <h5 class="fw-bold mb-4" style="color:var(--primary)"><i class="bi bi-briefcase-fill me-2" style="color:var(--highlight)"></i>Professional Experience</h5>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+                  <div>
+                    <div class="timeline-company">Hitachi Solutions</div>
+                    <div class="timeline-role">Intern · Software Developer</div>
+                    <div class="timeline-location mt-1"><i class="bi bi-geo-alt me-1"></i>Chennai, Tamil Nadu</div>
+                  </div>
+                  <span class="timeline-date"><i class="bi bi-calendar3 me-1"></i>May 2024</span>
+                </div>
+                <div class="mt-3">
+                  <div class="achievement-item"><i class="bi bi-check-circle-fill"></i><span>Designed and developed a full business solution website using <strong>Microsoft Power Apps</strong>, creating a user-friendly interface for business data management.</span></div>
+                  <div class="achievement-item"><i class="bi bi-check-circle-fill"></i><span>Streamlined internal business processes by digitizing workflows, enabling real-time data entry and retrieval.</span></div>
+                  <div class="achievement-item"><i class="bi bi-check-circle-fill"></i><span>Collaborated with the development team to integrate the Power Apps solution with backend data sources, ensuring seamless data flow.</span></div>
+                  <div class="achievement-item"><i class="bi bi-check-circle-fill"></i><span>Assisted in consumer solutions and gained exposure to the full web development lifecycle.</span></div>
+                </div>
+                <div class="mt-3 pt-3" style="border-top:1px solid #f0f0f0">
+                  <span class="skill-tag" style="font-size:.78rem">Microsoft Power Apps</span>
+                  <span class="skill-tag" style="font-size:.78rem">Web Development</span>
+                  <span class="skill-tag" style="font-size:.78rem">Data Management</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact CTA -->
+          <div class="mt-4 p-4 rounded-4 text-center" style="background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff">
+            <h5 class="fw-bold mb-2">Let's Connect</h5>
+            <p style="color:#aac4e0;font-size:.9rem;margin-bottom:1.5rem">Open to internships and opportunities in AI/ML & software development</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="mailto:Sujith.sridhar76@gmail.com" class="btn btn-sm px-3 py-2" style="background:var(--highlight);color:#fff;border-radius:20px;border:none"><i class="bi bi-envelope-fill me-1"></i>Email Me</a>
+              <a href="https://www.linkedin.com/in/sujith-sridhar-158b8229a" target="_blank" class="btn btn-sm px-3 py-2" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:20px"><i class="bi bi-linkedin me-1"></i>LinkedIn</a>
+              <a href="tel:8610676183" class="btn btn-sm px-3 py-2" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:20px"><i class="bi bi-telephone-fill me-1"></i>Call Me</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <h5 class="fw-bold mb-4" style="color:var(--primary)"><i class="bi bi-mortarboard-fill me-2" style="color:var(--highlight)"></i>Education</h5>
+          <div class="edu-card mb-4">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5 class="fw-bold mb-1">Jain University</h5>
+                <p style="color:#aac4e0;font-size:.88rem;margin:0">Bangalore, Karnataka</p>
+              </div>
+              <span style="background:rgba(233,69,96,.3);color:#ff9eae;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600">2023 – 2026</span>
+            </div>
+            <div style="background:rgba(255,255,255,.12);border-radius:10px;padding:1rem;margin-bottom:1rem">
+              <p style="font-size:.8rem;color:#aac4e0;margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.5px">Degree</p>
+              <p style="font-weight:600;margin:0">Bachelor of Computer Applications (BCA)</p>
+              <p style="color:#e8c97c;font-size:.85rem;margin:0">Specialization in AI & Machine Learning</p>
+            </div>
+            <p style="font-size:.85rem;color:#aac4e0;margin-bottom:.5rem">Relevant Coursework:</p>
+            <div>
+              <span class="course-badge">Data Structures</span>
+              <span class="course-badge">DBMS (SQL)</span>
+              <span class="course-badge">OOP (Java)</span>
+              <span class="course-badge">Python for Data Science</span>
+            </div>
+          </div>
+
+          <!-- Skills Summary Card -->
+          <div class="info-card">
+            <h6 class="fw-bold mb-3" style="color:var(--primary)">Key Highlights</h6>
+            <div class="d-flex align-items-start gap-3 mb-3">
+              <div style="width:38px;height:38px;background:rgba(233,69,96,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--highlight);flex-shrink:0"><i class="bi bi-star-fill"></i></div>
+              <div><div style="font-weight:600;font-size:.9rem;color:var(--primary)">Real-World Experience</div><div style="font-size:.82rem;color:#888">Internship at a global company</div></div>
+            </div>
+            <div class="d-flex align-items-start gap-3 mb-3">
+              <div style="width:38px;height:38px;background:rgba(15,52,96,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0"><i class="bi bi-cpu-fill"></i></div>
+              <div><div style="font-weight:600;font-size:.9rem;color:var(--primary)">AI & ML Specialization</div><div style="font-size:.82rem;color:#888">Focused BCA curriculum</div></div>
+            </div>
+            <div class="d-flex align-items-start gap-3 mb-3">
+              <div style="width:38px;height:38px;background:rgba(29,158,117,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0d6e56;flex-shrink:0"><i class="bi bi-code-slash"></i></div>
+              <div><div style="font-weight:600;font-size:.9rem;color:var(--primary)">Multi-language Proficiency</div><div style="font-size:.82rem;color:#888">Python, Java, C, SQL</div></div>
+            </div>
+            <div class="d-flex align-items-start gap-3">
+              <div style="width:38px;height:38px;background:rgba(127,119,221,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#534ab7;flex-shrink:0"><i class="bi bi-globe"></i></div>
+              <div><div style="font-weight:600;font-size:.9rem;color:var(--primary)">Full Lifecycle Exposure</div><div style="font-size:.82rem;color:#888">Development to deployment</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p class="mb-1"><strong style="color:#fff">Sujith S</strong> &nbsp;·&nbsp; BCA Student at Jain University</p>
+    <p class="mb-0">
+      <a href="mailto:Sujith.sridhar76@gmail.com"><i class="bi bi-envelope-fill me-1"></i>Sujith.sridhar76@gmail.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/sujith-sridhar-158b8229a" target="_blank"><i class="bi bi-linkedin me-1"></i>LinkedIn</a>
+      &nbsp;·&nbsp;
+      <span><i class="bi bi-telephone-fill me-1"></i>8610676183</span>
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function showPage(id, clickedLink) {
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-link'));
+    if (clickedLink) clickedLink.classList.add('active-link');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+</script>
+</body>
+</html>
